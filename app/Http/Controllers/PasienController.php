@@ -30,7 +30,7 @@ class PasienController extends Controller
         return DataTables::of($data)
             ->addIndexColumn()
             ->addColumn('action', function ($pasien) {
-                $buttons = '';
+                $buttons = '<div class="flex items-center justify-center gap-2">';
 
                     $buttons .= '
                         <a href="' . route('pasiens.edit', $pasien->id_pasien) . '"  
@@ -46,6 +46,18 @@ class PasienController extends Controller
 
                         </a>
                     ';
+                    $buttons .= '
+                        <button
+                            type="button"
+                            data-id="' . $pasien->id_pasien . '"
+                            class="delete-pasiens inline-flex items-center justify-center w-8 h-8 rounded-md bg-red-500 hover:bg-red-600 text-white"
+                            title="Hapus">
+
+                            <i class="ti ti-trash text-sm"></i>
+                        </button>
+                    ';
+
+                    $buttons .= '</div>';
                     return $buttons;
             })
 
@@ -160,9 +172,12 @@ class PasienController extends Controller
      */
     public function destroy(Pasien $pasien)
     {
-        $pasien->delete(); // Menghapus data pasien
+        $pasien->delete();
 
-        return redirect()->route('pasiens.index')->with('success', 'Data pasien berhasil dihapus.');
+        return response()->json([
+            'success' => true,
+            'message' => 'Data pasien berhasil dihapus.'
+        ]);
     }
 
     /**

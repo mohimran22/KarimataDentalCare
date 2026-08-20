@@ -12,6 +12,11 @@ class Pasien extends Model
     protected $table = 'pasiens';
     protected $primaryKey = 'id_pasien';
 
+    public function getRouteKeyName()
+    {
+        return 'id_pasien';
+    }
+
     protected $fillable = [
         'nama_pasien',
         'jenis_kelamin',

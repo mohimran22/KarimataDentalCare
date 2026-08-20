@@ -10,183 +10,206 @@
     {{-- <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/js/select2.min.js"></script> --}}
 
-    <div class="container mx-auto mt-4">
-        <form action="{{ route('tindakan.store') }}" method="POST" class="space-y-6">
-            @csrf
-
-            <div class="bg-white shadow-sm rounded-2xl border border-gray-200 p-6">
-
-                <div class="mb-6">
-                    {{-- <h2 class="text-2xl font-bold text-gray-800">
-                        Tambah Tindakan
-                    </h2> --}}
-
-                    <p class="text-sm text-gray-500 mt-1">
+    <div class="min-h-screen bg-gray-100 py-10">
+        <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="bg-white shadow-xl rounded-2xl overflow-hidden">
+                <div class="bg-primary-700 px-8 py-6 rounded-t-lg">
+                    <h2 class="text-2xl text-white">
+                        Tambah Data Tindakan
+                    </h2>
+                    <p class="text-blue-100 mt-1 text-sm">
                         Input data tindakan pasien
                     </p>
                 </div>
+                <div class="p-8">
+                    @if ($errors->any())
+                        <div class="mb-6 rounded-lg bg-red-100 border border-red-300 text-red-700 p-4">
+                            <ul class="list-disc list-inside space-y-1">
+                                @foreach ($errors->all() as $error)
+                                    <li>{{ $error }}</li>
+                                @endforeach
+                            </ul>
+                        </div>
+                    @endif
+                    <form action="{{ route('tindakan.store') }}" method="POST" class="space-y-6">
+                        @csrf
 
-                <div class="grid grid-cols-1 md:grid-cols-2 gap-5">
+                        <div class="bg-white shadow-sm rounded-2xl border border-gray-200 p-6">
 
-                    <div>
-                        <label for="dokter_id" class="block mb-2 text-sm font-semibold text-gray-700">
-                            Dokter
-                        </label>
+                            {{-- <div class="mb-6">
+                                <h2 class="text-2xl font-bold text-gray-800">
+                                    Tambah Tindakan
+                                </h2>
 
-                        <select name="dokter_id"
-                                id="dokter_id"
-                                class="w-full rounded-xl border-gray-300 focus:border-blue-500 focus:ring-blue-500"
-                                required>
+                             <p class="text-sm text-gray-500 mt-1">
+                                    Input data tindakan pasien
+                                </p>
+                            </div> --}}
 
-                            <option value="">Pilih Dokter</option>
+                            <div class="grid grid-cols-1 md:grid-cols-2 gap-5">
 
-                            @foreach ($dokters as $dokter)
-                                <option value="{{ $dokter->id_dokter }}">
-                                    {{ $dokter->nama_dokter }}
-                                </option>
-                            @endforeach
-                        </select>
-                    </div>
+                                <div>
+                                    <label for="dokter_id" class="block mb-2 text-sm font-semibold text-gray-700">
+                                        Dokter
+                                    </label>
 
-                    <div>
-                        <label for="pasien_id" class="block mb-2 text-sm font-semibold text-gray-700">
-                            Pasien
-                        </label>
+                                    <select name="dokter_id"
+                                            id="dokter_id"
+                                            class="w-full rounded-xl border-gray-300 focus:border-blue-500 focus:ring-blue-500"
+                                            required>
 
-                        <select name="pasien_id"
-                                id="pasien_id"
-                                class="w-full rounded-xl border-gray-300 focus:border-blue-500 focus:ring-blue-500"
-                                required>
+                                        <option value="">Pilih Dokter</option>
 
-                            <option value="">Pilih Pasien</option>
-                        </select>
-                    </div>
+                                        @foreach ($dokters as $dokter)
+                                            <option value="{{ $dokter->id_dokter }}">
+                                                {{ $dokter->nama_dokter }}
+                                            </option>
+                                        @endforeach
+                                    </select>
+                                </div>
 
-                    <div>
-                        <label for="tanggal_visit" class="block mb-2 text-sm font-semibold text-gray-700">
-                            Tanggal Visit
-                        </label>
+                                <div>
+                                    <label for="pasien_id" class="block mb-2 text-sm font-semibold text-gray-700">
+                                        Pasien
+                                    </label>
 
-                        <input type="date"
-                            name="tanggal_visit"
-                            id="tanggal_visit"
-                            class="w-full rounded-xl border-gray-300 focus:border-blue-500 focus:ring-blue-500"
-                            required>
-                    </div>
+                                    <select name="pasien_id"
+                                            id="pasien_id"
+                                            class="w-full rounded-xl border-gray-300 focus:border-blue-500 focus:ring-blue-500"
+                                            required>
 
-                    <div>
-                        <label for="jam" class="block mb-2 text-sm font-semibold text-gray-700">
-                            Jam
-                        </label>
+                                        <option value="">Pilih Pasien</option>
+                                    </select>
+                                </div>
 
-                        <input type="time" name="jam" id="jam" class="w-full rounded-xl border-gray-300 focus:border-blue-500 focus:ring-blue-500" required>
-                    </div>
+                                <div>
+                                    <label for="tanggal_visit" class="block mb-2 text-sm font-semibold text-gray-700">
+                                        Tanggal Visit
+                                    </label>
 
-                </div>
+                                    <input type="date"
+                                        name="tanggal_visit"
+                                        id="tanggal_visit"
+                                        class="w-full rounded-xl border-gray-300 focus:border-blue-500 focus:ring-blue-500"
+                                        required>
+                                </div>
 
-                <div class="mt-6 space-y-5">
+                                <div>
+                                    <label for="jam" class="block mb-2 text-sm font-semibold text-gray-700">
+                                        Jam
+                                    </label>
 
-                    <div>
-                        <label for="tindakan" class="block mb-2 text-sm font-semibold text-gray-700">
-                            Tindakan Umum
-                        </label>
+                                    <input type="time" name="jam" id="jam" class="w-full rounded-xl border-gray-300 focus:border-blue-500 focus:ring-blue-500" required>
+                                </div>
 
-                        <textarea name="tindakan" id="tindakan" rows="3" class="w-full rounded-xl border-gray-300 focus:border-blue-500 focus:ring-blue-500"></textarea>
-                    </div>
+                            </div>
 
-                    <div>
-                        <label for="pemakaian_obat" class="block mb-2 text-sm font-semibold text-gray-700">
-                            Pemakaian Obat
-                        </label>
+                            <div class="mt-6 space-y-5">
 
-                        <textarea name="pemakaian_obat" id="pemakaian_obat" rows="3" class="w-full rounded-xl border-gray-300 focus:border-blue-500 focus:ring-blue-500"></textarea>
-                    </div>
+                                <div>
+                                    <label for="tindakan" class="block mb-2 text-sm font-semibold text-gray-700">
+                                        Tindakan Umum
+                                    </label>
 
-                    <div>
-                        <label for="tindak_lanjut" class="block mb-2 text-sm font-semibold text-gray-700">
-                            Tindak Lanjut
-                        </label>
+                                    <textarea name="tindakan" id="tindakan" rows="3" class="w-full rounded-xl border-gray-300 focus:border-blue-500 focus:ring-blue-500"></textarea>
+                                </div>
 
-                        <textarea name="tindak_lanjut" id="tindak_lanjut" rows="3" class="w-full rounded-xl border-gray-300 focus:border-blue-500 focus:ring-blue-500"></textarea>
-                    </div>
+                                <div>
+                                    <label for="pemakaian_obat" class="block mb-2 text-sm font-semibold text-gray-700">
+                                        Pemakaian Obat
+                                    </label>
 
-                </div>
-            </div>
+                                    <textarea name="pemakaian_obat" id="pemakaian_obat" rows="3" class="w-full rounded-xl border-gray-300 focus:border-blue-500 focus:ring-blue-500"></textarea>
+                                </div>
 
-            {{-- Kasus --}}
-            <div class="bg-white shadow-sm rounded-2xl border border-gray-200 p-6">
+                                <div>
+                                    <label for="tindak_lanjut" class="block mb-2 text-sm font-semibold text-gray-700">
+                                        Tindak Lanjut
+                                    </label>
 
-                <div class="flex items-center justify-between mb-5">
-                    <div>
-                        <h3 class="text-xl font-bold text-gray-800">
-                            Kasus Tindakan
-                        </h3>
+                                    <textarea name="tindak_lanjut" id="tindak_lanjut" rows="3" class="w-full rounded-xl border-gray-300 focus:border-blue-500 focus:ring-blue-500"></textarea>
+                                </div>
 
-                        <p class="text-sm text-gray-500">
-                            Tambahkan detail kasus pasien
-                        </p>
-                    </div>
-
-                    <button type="button" id="add-kasus" class="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-xl transition">
-                        + Tambah Kasus
-                    </button>
-                </div>
-
-                <div id="kasus-fields" class="space-y-4">
-
-                    <div class="kasus-item border border-gray-200 rounded-2xl p-4 bg-gray-50">
-
-                        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
-
-                            <input type="text" name="kasus[]" placeholder="Kasus" class="rounded-xl border-gray-300 focus:border-blue-500 focus:ring-blue-500" required>
-
-                            <input type="text"
-                                name="diagnosa[]"
-                                placeholder="Diagnosa"
-                                class="rounded-xl border-gray-300 focus:border-blue-500 focus:ring-blue-500"
-                                required>
-
-                            <input type="text"
-                                name="tindakan_khusus[]"
-                                placeholder="Tindakan"
-                                class="rounded-xl border-gray-300 focus:border-blue-500 focus:ring-blue-500">
-
-                            <input type="text"
-                                name="biaya[]"
-                                placeholder="Biaya"
-                                class="rounded-xl border-gray-300 focus:border-blue-500 focus:ring-blue-500"
-                                required>
-
+                            </div>
                         </div>
 
-                        <div class="mt-4 text-right">
-                            <button type="button"
-                                    class="remove-kasus bg-red-500 hover:bg-red-600 text-white px-4 py-2 rounded-xl transition">
-                                Hapus
+                        {{-- Kasus --}}
+                        <div class="bg-white shadow-sm rounded-2xl border border-gray-200 p-6">
+
+                            <div class="flex items-center justify-between mb-5">
+                                <div>
+                                    <h3 class="text-xl font-bold text-gray-800">
+                                        Kasus Tindakan
+                                    </h3>
+
+                                    <p class="text-sm text-gray-500">
+                                        Tambahkan detail kasus pasien
+                                    </p>
+                                </div>
+
+                                <button type="button" id="add-kasus" class="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-xl transition">
+                                    + Tambah Kasus
+                                </button>
+                            </div>
+
+                            <div id="kasus-fields" class="space-y-4">
+
+                                <div class="kasus-item border border-gray-200 rounded-2xl p-4 bg-gray-50">
+
+                                    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
+
+                                        <input type="text" name="kasus[]" placeholder="Kasus" class="rounded-xl border-gray-300 focus:border-blue-500 focus:ring-blue-500" required>
+
+                                        <input type="text"
+                                            name="diagnosa[]"
+                                            placeholder="Diagnosa"
+                                            class="rounded-xl border-gray-300 focus:border-blue-500 focus:ring-blue-500"
+                                            required>
+
+                                        <input type="text"
+                                            name="tindakan_khusus[]"
+                                            placeholder="Tindakan Khusus"
+                                            class="rounded-xl border-gray-300 focus:border-blue-500 focus:ring-blue-500">
+
+                                        <input type="text"
+                                            name="biaya[]"
+                                            placeholder="Biaya"
+                                            class="rounded-xl border-gray-300 focus:border-blue-500 focus:ring-blue-500"
+                                            required>
+
+                                    </div>
+
+                                    <div class="mt-4 text-right">
+                                        <button type="button"
+                                                class="remove-kasus bg-red-500 hover:bg-red-600 text-white px-4 py-2 rounded-xl transition">
+                                            Hapus
+                                        </button>
+                                    </div>
+
+                                </div>
+
+                            </div>
+                        </div>
+
+                        {{-- Footer --}}
+                        <div class="flex items-center justify-end gap-3">
+
+                            <a href="{{ route('tindakan.index') }}"
+                            class="px-5 py-2.5 rounded-xl border border-gray-300 text-gray-700 hover:bg-gray-100 transition">
+                                Batal
+                            </a>
+
+                            <button type="submit"
+                                    class="bg-blue-600 hover:bg-blue-700 text-white font-semibold px-6 py-2.5 rounded-xl shadow-sm transition">
+                                Simpan
                             </button>
+
                         </div>
 
-                    </div>
-
+                    </form>
                 </div>
             </div>
-
-            {{-- Footer --}}
-            <div class="flex items-center justify-end gap-3">
-
-                <a href="{{ route('tindakan.index') }}"
-                class="px-5 py-2.5 rounded-xl border border-gray-300 text-gray-700 hover:bg-gray-100 transition">
-                    Batal
-                </a>
-
-                <button type="submit"
-                        class="bg-blue-600 hover:bg-blue-700 text-white font-semibold px-6 py-2.5 rounded-xl shadow-sm transition">
-                    Simpan
-                </button>
-
-            </div>
-
-        </form>
+        </div>
     </div>
 
     <script>
@@ -217,27 +240,86 @@
         document.querySelectorAll('input[name="biaya[]"]').forEach(input => {
             attachRupiahFormat(input);
         });
-        document.getElementById('add-kasus').addEventListener('click', function() {
+        document.getElementById('add-kasus').addEventListener('click', function () {
             const container = document.getElementById('kasus-fields');
+
             const field = document.createElement('div');
-            field.classList.add('flex', 'items-center', 'mb-2', 'kasus-item');
+
+            field.classList.add(
+                'kasus-item',
+                'border',
+                'border-gray-200',
+                'rounded-2xl',
+                'p-4',
+                'bg-gray-50'
+            );
+
             field.innerHTML = `
-                <input type="text" name="kasus[]" class="flex-1 border border-gray-300 rounded-lg p-2 mr-2" placeholder="Kasus" required>
-                <input type="text" name="diagnosa[]" class="flex-1 border border-gray-300 rounded-lg p-2 mr-2" placeholder="Diagnosa" required>
-                <input type="text" name="tindakan_khusus[]" class="flex-1 border border-gray-300 rounded-lg p-2 mr-2" placeholder="Tindakan Khusus">
-                <input type="number" name="biaya[]" class="flex-1 border border-gray-300 rounded-lg p-2 mr-2" placeholder="Biaya" required>
-                <button type="button" class="remove-kasus bg-red-500 text-white px-2 py-1 rounded">Hapus</button>
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
+
+                    <input
+                        type="text"
+                        name="kasus[]"
+                        placeholder="Kasus"
+                        class="rounded-xl border-gray-300 focus:border-blue-500 focus:ring-blue-500"
+                        required
+                    >
+
+                    <input
+                        type="text"
+                        name="diagnosa[]"
+                        placeholder="Diagnosa"
+                        class="rounded-xl border-gray-300 focus:border-blue-500 focus:ring-blue-500"
+                        required
+                    >
+
+                    <input
+                        type="text"
+                        name="tindakan_khusus[]"
+                        placeholder="Tindakan Khusus"
+                        class="rounded-xl border-gray-300 focus:border-blue-500 focus:ring-blue-500"
+                    >
+
+                    <input
+                        type="text"
+                        name="biaya[]"
+                        placeholder="Biaya"
+                        class="rounded-xl border-gray-300 focus:border-blue-500 focus:ring-blue-500"
+                        required
+                    >
+
+                </div>
+
+                <div class="mt-4 text-right">
+                    <button
+                        type="button"
+                        class="remove-kasus bg-red-500 hover:bg-red-600 text-white px-4 py-2 rounded-xl transition"
+                    >
+                        Hapus
+                    </button>
+                </div>
             `;
+
             container.appendChild(field);
+
             const newBiayaInput = field.querySelector('input[name="biaya[]"]');
 
             attachRupiahFormat(newBiayaInput);
         });
 
-        document.getElementById('kasus-fields').addEventListener('click', function(e) {
+
+        document.getElementById('kasus-fields').addEventListener('click', function (e) {
+
             if (e.target.classList.contains('remove-kasus')) {
-                e.target.parentElement.remove();
+
+                const kasusItem = e.target.closest('.kasus-item');
+
+                if (kasusItem) {
+                    kasusItem.remove();
+                }
+
             }
+
         });
     </script>
 </x-app-layout>

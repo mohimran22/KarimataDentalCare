@@ -36,8 +36,10 @@ class TindakanController extends Controller
                 $data->where('dokter_id', $dokter->id_dokter);
             }
         }
-
-        $data->orderBy('created_at', 'desc');
+        if ($request->filled('tanggal_visit')) {
+            $data->whereDate('tanggal_visit', $request->tanggal_visit);
+        }
+        // $data->orderBy('tanggal_visit', 'desc');
 
             return DataTables::of($data)
                 ->filter(function ($query) use ($request) {
@@ -67,7 +69,7 @@ class TindakanController extends Controller
                 ->addColumn('nama_dokter', function ($row) {
                     return $row->dokter->nama_dokter ?? '-';
                 })
-                ->addColumn('tanggal_visit', fn($row) => $row->tanggal_visit ? Carbon::parse($row->tanggal_visit)->format('d/m/Y') : '-')
+                ->editColumn('tanggal_visit', fn($row) => $row->tanggal_visit ? Carbon::parse($row->tanggal_visit)->format('d/m/Y') : '-')
                 ->addColumn('jam', function ($row) {
                     return $row->jam ?? '-';
                 })
@@ -228,17 +230,20 @@ class TindakanController extends Controller
     // Menampilkan form untuk mengedit tindakan
     public function edit($id)
     {
-        // Cek apakah pengguna adalah Manager
         if (!in_array(session('user_role'), ['manager', 'dokter'])) {
             return redirect()->route('tindakan.index')
                 ->with('error', 'Anda tidak memiliki izin untuk mengedit tindakan.');
         }
 
-        $tindakan = Tindakan::with('kasus')->findOrFail($id);
-        $dokters = Dokter::all(); 
-        $pasiens = Pasien::all();
+        $tindakan = Tindakan::with(['kasus', 'pasien', 'kasir'])
+            ->findOrFail($id);
 
-        return view('tindakan.edit', compact('tindakan', 'dokters', 'pasiens'));
+        $dokters = Dokter::all();
+
+        return view('tindakan.edit', compact(
+            'tindakan',
+            'dokters'
+        ));
     }
 
     // Mengupdate data tindakan, kasus, dan kasir
@@ -248,7 +253,11 @@ class TindakanController extends Controller
             return redirect()->route('tindakan.index')
                 ->with('error', 'Anda tidak memiliki izin untuk mengedit tindakan.');
         }
-
+        $request->merge([
+            'biaya' => collect($request->biaya)->map(function ($value) {
+                return str_replace('.', '', $value);
+            })->toArray(),
+        ]);
         $validated = $request->validate([
             'dokter_id' => 'required|exists:dokters,id_dokter',
             'pasien_id' => 'required|exists:pasiens,id_pasien',
@@ -294,9 +303,11 @@ class TindakanController extends Controller
         }
 
         // Perbarui transaksi kasir
-        $tindakan->kasir->update([
-            'total_biaya' => $total_biaya,
-        ]);
+        if ($tindakan->kasir) {
+            $tindakan->kasir->update([
+                'total_biaya' => $total_biaya,
+            ]);
+        }
 
         return redirect()->route('tindakan.index')->with('success', 'Tindakan, kasus, dan transaksi kasir berhasil diperbarui!');
     }

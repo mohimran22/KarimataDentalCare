@@ -128,143 +128,61 @@
                         .addClass('form-control');
                 }
             });
-
-            // Delete user functionally
             $('table').on('click', '.delete-pasiens', function () {
-            const projectId = $(this).data('id');
 
-            Swal.fire({
-            title: 'Yakin ingin menghapus?',
-            text: "Data akan hilang secara permanen.",
-            icon: 'warning',
-            showCancelButton: true,
-            confirmButtonColor: '#d33',
-            cancelButtonColor: '#6c757d',
-            confirmButtonText: 'Ya, hapus!',
-            cancelButtonText: 'Batal'
+                const pasienId = $(this).data('id');
 
-            }).then((result) => {
+                Swal.fire({
+                    title: 'Yakin ingin menghapus?',
+                    text: 'Data pasien yang dihapus tidak dapat dikembalikan!',
+                    icon: 'warning',
+                    showCancelButton: true,
+                    confirmButtonText: 'Ya, Hapus',
+                    cancelButtonText: 'Batal',
+                    reverseButtons: true,
+                    focusCancel: true
+                }).then((result) => {
 
-                if (result.isConfirmed) {
-                    $.ajax({
+                    if (result.isConfirmed) {
 
-                        url: `/projects/${projectId}`,
-                        method: 'DELETE',
-                        data: {
-                            _token: '{{ csrf_token() }}',
-                        },
+                        $.ajax({
+                            url: '/pasiens/' + pasienId,
+                            type: 'DELETE',
 
-                        success: function (response) {
-                            if (response.status === 'success') {
+                            data: {
+                                _token: '{{ csrf_token() }}'
+                            },
+
+                            success: function (response) {
+
                                 Swal.fire({
-                                    icon: 'success',
                                     title: 'Berhasil!',
-                                    text: 'Data Proyek telah dihapus.',
+                                    text: response.message,
+                                    icon: 'success',
                                     timer: 2000,
                                     showConfirmButton: false
-                            });
+                                });
 
-                        table.ajax.reload(null, false); // refresh datatable
-                        } else {
+                                table.ajax.reload(null, false);
+                            },
 
-                            Swal.fire('Gagal', response.message || 'Tidak bisa menghapus data.', 'error');
-                        }
-                        },
+                            error: function (xhr) {
 
-                    error: function () {
+                                console.error(xhr.responseText);
 
-                    Swal.fire('Error', 'Terjadi kesalahan saat menghapus.', 'error');
+                                Swal.fire({
+                                    title: 'Gagal!',
+                                    text: 'Terjadi kesalahan saat menghapus data pasien.',
+                                    icon: 'error'
+                                });
+                            }
+
+                        });
+
                     }
 
-                    });
-                }
-            });
-            });
+                });
 
-
-           
+            });         
         });
     </script>
-{{-- <script>
-$(function () {
-
-    let table = $('#tablePasiens').DataTable({
-        processing: true,
-        serverSide: true,
-        searching: true,
-        lengthChange: false,
-        pageLength: 10,
-        info: false,
-        dom: 'rtip',
-
-        ajax: "{{ route('pasiens.index') }}",
-        error: function(xhr) {
-            console.log(xhr.responseText);
-        }
-
-        columns: [
-            { data: 'id_pasien', name: 'id_pasien' },
-            { data: 'nama_pasien', name: 'nama_pasien' },
-            { data: 'jenis_kelamin', name: 'jenis_kelamin' },
-            { data: 'alamat_pasien', name: 'alamat_pasien' },
-            { data: 'profesi', name: 'profesi' },
-            { data: 'nik', name: 'nik' },
-            { data: 'nohp', name: 'nohp' },
-            { data: 'alergi', name: 'alergi' },
-            {
-                data: 'aksi',
-                name: 'aksi',
-                orderable: false,
-                searchable: false,
-                className: 'text-center'
-            }
-        ],
-
-        createdRow: function(row, data, dataIndex) {
-            $('td', row).addClass('px-4 py-3 text-sm text-gray-700 dark:text-gray-200');
-        },
-
-        drawCallback: function(settings) {
-
-            let info = table.page.info();
-
-            $('#table-info').html(`
-                Menampilkan
-                ${info.start + 1}
-                sampai
-                ${info.end}
-                dari
-                ${info.recordsTotal}
-                data
-            `);
-
-            let pagination = '';
-
-            for(let i = 0; i < info.pages; i++) {
-
-                pagination += `
-                    <button
-                        class="px-3 py-1 rounded-lg border text-sm
-                        ${i === info.page
-                            ? 'bg-blue-600 text-white border-blue-600'
-                            : 'bg-white text-gray-700 border-gray-300 hover:bg-gray-100'
-                        }"
-                        onclick="$('#table-pasien').DataTable().page(${i}).draw('page')">
-
-                        ${i + 1}
-
-                    </button>
-                `;
-            }
-
-            $('#pagination').html(pagination);
-        }
-    });
-
-    $('#search').keyup(function () {
-        table.search(this.value).draw();
-    });
-
-});
-</script> --}}
-
