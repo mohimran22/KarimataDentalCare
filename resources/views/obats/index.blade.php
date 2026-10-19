@@ -27,7 +27,7 @@
                         </div>
                     </div>
                     <div class="overflow-x-auto">
-                        <table class="w-full text-sm text-left text-gray-500">
+                        <table id="obat-table" class="w-full text-sm text-left text-gray-500">
                             <thead class="text-xs text-gray-700 uppercase bg-gray-50">
                                 <tr>
                                     <th scope="col" class="px-4 py-3">ID</th>
@@ -37,11 +37,11 @@
                                     <th scope="col" class="px-4 py-3">Harga Beli</th>
                                     <th scope="col" class="px-4 py-3">Tanggal Beli</th>
                                     <th scope="col" class="px-4 py-3">Supplier</th>
-                                   {{--  <th scope="col" class="px-4 py-3">Aksi</th> --}}
+                                    <th scope="col" class="px-4 py-3">Aksi</th>
                                 </tr>
                             </thead>
                             <tbody>
-                                @foreach ($obats as $obat)
+                                {{-- @foreach ($obats as $obat)
                                     <tr class="bg-white border-b">
                                         <td class="px-4 py-3">{{ $obat->id_obat }}</td>
                                         <td class="px-4 py-3">{{ $obat->nama_obat }}</td>
@@ -50,16 +50,16 @@
                                         <td class="px-4 py-3">Rp{{ number_format($obat->harga_beli, 0, ',', '.') }}</td>
                                         <td class="px-4 py-3">{{ $obat->tanggal_beli }}</td>
                                         <td class="px-4 py-3">{{ $obat->supplier }}</td>
-                                   {{--      <td class="px-4 py-3 flex space-x-2">
-                                            <a href="{{ route('obats.edit', $obat->id) }}" class="text-blue-600 hover:underline">Edit</a>
-                                            <form action="{{ route('obats.destroy', $obat->id) }}" method="POST" onsubmit="return confirm('Apakah Anda yakin ingin menghapus obat ini?')">
+                                        <td class="px-4 py-3 flex space-x-2">
+                                            <a href="{{ route('obats.edit', $obat->id_obat) }}" class="text-blue-600 hover:underline">Edit</a>
+                                            <form action="{{ route('obats.destroy', $obat->id_obat) }}" method="POST" onsubmit="return confirm('Apakah Anda yakin ingin menghapus obat ini?')">
                                                 @csrf
                                                 @method('DELETE')
                                                 <button type="submit" class="text-red-600 hover:underline">Hapus</button>
                                             </form>
-                                        </td> --}}
+                                        </td>
                                     </tr>
-                                @endforeach
+                                @endforeach --}}
                             </tbody>
                         </table>
                     </div>
@@ -71,3 +71,78 @@
         </section>
     </div>
 </x-app-layout>
+    <script>
+        $(function () {
+            $('#obat-table').DataTable({
+                processing: true,
+                serverSide: true,
+                ajax: "{{ route('obats.index') }}",
+                columns: [
+                    { data: 'id_obat', name: 'id_obat' },
+                    { data: 'nama_obat', name: 'nama_obat' },
+                    { data: 'merk', name: 'merk' },
+                    { data: 'ukuran', name: 'ukuran' },
+                    { data: 'harga_beli', name: 'harga_beli' },
+                    { data: 'tanggal_beli', name: 'tanggal_beli' },
+                    { data: 'supplier', name: 'supplier' },
+                    { data: 'action', name: 'action', orderable: false, searchable: false },
+                ],
+            });
+            $('#obat-table').on('click', '.delete-obats', function () {
+
+                const obatId = $(this).data('id');
+
+                Swal.fire({
+                    title: 'Yakin ingin menghapus?',
+                    text: 'Data obat yang dihapus tidak dapat dikembalikan!',
+                    icon: 'warning',
+                    showCancelButton: true,
+                    confirmButtonText: 'Ya, Hapus',
+                    cancelButtonText: 'Batal',
+                    reverseButtons: true,
+                    focusCancel: true
+                }).then((result) => {
+
+                    if (result.isConfirmed) {
+
+                        $.ajax({
+                            url: '/obats/' + obatId,
+                            type: 'DELETE',
+
+                            data: {
+                                _token: '{{ csrf_token() }}'
+                            },
+
+                            success: function (response) {
+
+                                Swal.fire({
+                                    title: 'Berhasil!',
+                                    text: response.message,
+                                    icon: 'success',
+                                    timer: 2000,
+                                    showConfirmButton: false
+                                });
+
+                                table.ajax.reload(null, false);
+                            },
+
+                            error: function (xhr) {
+
+                                console.error(xhr.responseText);
+
+                                Swal.fire({
+                                    title: 'Gagal!',
+                                    text: 'Terjadi kesalahan saat menghapus data pasien.',
+                                    icon: 'error'
+                                });
+                            }
+
+                        });
+
+                    }
+
+                });
+
+            });  
+        });
+    </script>

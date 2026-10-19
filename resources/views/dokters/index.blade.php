@@ -95,7 +95,7 @@
                                     </th>
                                     <th class="px-6 py-4">No</th>
                                     <th class="px-6 py-4">Nama</th>
-                                    <th class="px-6 py-4">Role</th>
+                                    {{-- <th class="px-6 py-4">Role</th> --}}
                                     <th class="px-6 py-4">NIP</th>
                                     <th class="px-6 py-4">Alamat</th>
                                     <th class="px-6 py-4">Tanggal Lahir</th>
@@ -172,7 +172,7 @@
                     },
 
                     { data: 'nama_dokter', name: 'nama_dokter' },
-                    { data: 'role', name: 'role' },
+                    // { data: 'role', name: 'role' },
                     { data: 'nip', name: 'nip' },
                     { data: 'alamat', name: 'alamat' },
                     { data: 'tanggal_lahir', name: 'tanggal_lahir' },

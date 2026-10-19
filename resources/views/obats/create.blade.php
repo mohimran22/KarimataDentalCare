@@ -18,7 +18,7 @@
                 <div class="relative overflow-hidden bg-white shadow-md dark:bg-gray-800 sm:rounded-lg">
                     <div class="px-4 py-3">
                         <h3 class="text-lg font-medium text-gray-900 dark:text-gray-100">
-                            Form Tambah Obat
+                            Tambah Data Obat
                         </h3>
 
                         <form action="{{ route('obats.store') }}" method="POST" class="mt-4">
@@ -87,10 +87,19 @@
                                 </div>
                             </div>
 
-                            <div class="mt-6 text-right">
-                                <button type="submit" class="px-6 py-2 text-white bg-primary-700 rounded-lg hover:bg-primary-800 focus:ring-4 focus:ring-primary-300 dark:bg-primary-600 dark:hover:bg-primary-700 focus:outline-none dark:focus:ring-primary-800">
-                                    Simpan
+
+                            <div class="mt-8 flex justify-end gap-3">
+
+                                <a href="{{ route('obats.index') }}"
+                                class="px-5 py-3 rounded-xl border border-gray-300 text-black-400 hover:bg-gray-100 transition">
+                                    Batal
+                                </a>
+
+                                <button type="submit"
+                                        class="px-6 py-3 rounded-xl bg-primary-700 text-white shadow-md hover:bg-primary-800 transition">
+                                    Simpan Data
                                 </button>
+
                             </div>
                         </form>
                     </div>
