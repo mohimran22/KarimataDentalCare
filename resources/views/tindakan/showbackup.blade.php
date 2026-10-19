@@ -83,7 +83,93 @@
 
                 </select>
             </div>
+            <div class="flex flex-col px-4 py-3 space-y-3 lg:flex-row
+            lg:items-end lg:justify-between lg:space-y-0 lg:space-x-4">
 
+    {{-- Kiri: Tambah --}}
+    <div>
+        <a href="{{ route('tindakan.create') }}"
+            class="flex items-center justify-center px-4 py-2 text-sm font-medium
+                   text-white bg-primary-700 hover:bg-blue-800 rounded-lg
+                   focus:ring-4 focus:ring-blue-300">
+
+            <svg class="h-3.5 w-3.5 mr-2"
+                fill="currentColor"
+                viewBox="0 0 20 20"
+                xmlns="http://www.w3.org/2000/svg"
+                aria-hidden="true">
+                <path
+                    clip-rule="evenodd"
+                    fill-rule="evenodd"
+                    d="M10 3a1 1 0 011 1v5h5a1 1 0 110 2h-5v5a1 1 0 11-2 0v-5H4a1 1 0 110-2h5V4a1 1 0 011-1z" />
+            </svg>
+
+            Tambah Tindakan
+        </a>
+    </div>
+
+    {{-- Kanan: Filter tanggal + Search --}}
+    <div class="flex flex-col lg:flex-row lg:items-end gap-3 w-full lg:w-auto">
+
+        <div>
+            <label for="tanggalMulai"
+                class="block mb-1 text-sm font-medium text-gray-700">
+                Tanggal Mulai
+            </label>
+
+            <input
+                type="date"
+                id="tanggalMulai"
+                class="p-2.5 text-sm border border-gray-300 rounded-lg
+                       focus:ring-blue-500 focus:border-blue-500">
+        </div>
+
+        <div>
+            <label for="tanggalSampai"
+                class="block mb-1 text-sm font-medium text-gray-700">
+                Tanggal Sampai
+            </label>
+
+            <input
+                type="date"
+                id="tanggalSampai"
+                class="p-2.5 text-sm border border-gray-300 rounded-lg
+                       focus:ring-blue-500 focus:border-blue-500">
+        </div>
+
+        <button
+            type="button"
+            id="filterTanggal"
+            class="px-4 py-2.5 text-sm font-medium text-white
+                   bg-blue-600 hover:bg-blue-700 rounded-lg">
+            Filter
+        </button>
+
+        <button
+            type="button"
+            id="resetFilterTanggal"
+            class="px-4 py-2.5 text-sm font-medium text-gray-700
+                   bg-gray-200 hover:bg-gray-300 rounded-lg">
+            Reset
+        </button>
+
+        <div class="w-full lg:w-80">
+            <label for="searchTindakan"
+                class="block mb-1 text-sm font-medium text-gray-700">
+                Pencarian
+            </label>
+
+            <input
+                type="text"
+                id="searchTindakan"
+                placeholder="Cari pasien / tindakan / dokter..."
+                class="w-full p-2.5 text-sm border border-gray-300 rounded-lg
+                       focus:ring-blue-500 focus:border-blue-500">
+        </div>
+
+    </div>
+
+</div>
             <div class="mb-4">
                 <label for="pasien_id" class="block text-gray-700">Pasien:</label>
                     <select name="pasien_id" id="pasien_id" class="w-full" required>

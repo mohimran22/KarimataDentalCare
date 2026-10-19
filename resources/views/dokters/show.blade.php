@@ -40,7 +40,7 @@
                         </div>
                     </div>
                     <div class="mt-4 text-right">
-                        <button type="submit" class="bg-gradient-to-r from-blue-500 to-blue-700 text-white px-6 py-2 rounded-lg hover:from-green-500 hover:to-green-700 transition-all focus:outline-none shadow-lg transform hover:scale-105">Terapkan Filter</button>
+                        <button type="submit" class="bg-primary-700 text-white px-6 py-2 rounded-lg hover:opacity-90 transition-all focus:outline-none shadow-lg transform hover:scale-105">Terapkan Filter</button>
                     </div>
                 </form>
 

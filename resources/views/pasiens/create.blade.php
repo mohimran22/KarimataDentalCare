@@ -253,7 +253,7 @@
 
                         <div class="mt-8 flex justify-end gap-3">
 
-                            <a href="{{ route('dokters.index') }}"
+                            <a href="{{ route('pasiens.index') }}"
                             class="px-5 py-3 rounded-xl border border-gray-300 text-black-400 hover:bg-gray-100 transition">
                                 Batal
                             </a>

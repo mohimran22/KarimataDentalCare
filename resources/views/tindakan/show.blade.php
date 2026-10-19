@@ -6,7 +6,7 @@
             </h2>
 
             <a href="{{ route('tindakan.index') }}"
-               class="inline-flex items-center px-4 py-2 bg-blue-600 hover:bg-blue-700 text-white rounded-lg shadow transition">
+               class="inline-flex items-center px-4 py-2 bg-primary-700 hover:bg-blue-700 text-white rounded-lg shadow transition">
                 ← Kembali
             </a>
         </div>
@@ -26,12 +26,12 @@
             <div class="bg-white rounded-2xl shadow-sm border border-gray-200 overflow-hidden">
 
                 {{-- Header --}}
-                <div class="bg-gradient-to-r from-blue-600 to-blue-500 px-6 py-5 text-white">
+                <div class="bg-primary-700 px-6 py-5 text-white">
                     <h3 class="text-2xl">
                         {{ $tindakan->tindakan }}
                     </h3>
 
-                    <p class="text-blue-100 mt-1">
+                    <p class="text-white/80 text-sm mt-1">
                         Detail tindakan pasien
                     </p>
                 </div>
@@ -137,7 +137,7 @@
                                                     {{ $kasus->tindakan_khusus }}
                                                 </td>
 
-                                                <td class="px-6 py-4 text-right text-blue-700">
+                                                <td class="px-6 py-4 text-right text-primary-700">
                                                     Rp {{ number_format($kasus->biaya, 0, ',', '.') }}
                                                 </td>
                                             </tr>

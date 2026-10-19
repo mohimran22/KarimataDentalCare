@@ -147,7 +147,7 @@
                                     </p>
                                 </div>
 
-                                <button type="button" id="add-kasus" class="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-xl transition">
+                                <button type="button" id="add-kasus" class="bg-primary-700 hover:bg-blue-700 text-white px-4 py-2 rounded-xl transition">
                                     + Tambah Kasus
                                 </button>
                             </div>
@@ -200,7 +200,7 @@
                             </a>
 
                             <button type="submit"
-                                    class="bg-blue-600 hover:bg-blue-700 text-white font-semibold px-6 py-2.5 rounded-xl shadow-sm transition">
+                                    class="bg-primary-700 hover:bg-blue-700 text-white font-semibold px-6 py-2.5 rounded-xl shadow-sm transition">
                                 Simpan
                             </button>
 

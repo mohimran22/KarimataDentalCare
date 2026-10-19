@@ -59,7 +59,7 @@
                                 type="button"
                                 id="filterTanggal"
                                 class="px-4 py-2.5 text-sm font-medium text-white
-                                    bg-blue-600 hover:bg-blue-700 rounded-lg">
+                                    bg-primary-700 hover:bg-blue-800 rounded-lg">
                                 Filter
                             </button>
 
