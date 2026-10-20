@@ -144,6 +144,7 @@
                             d.tanggal_visit = $('#tanggalVisit').val();
                         }
                     },
+                            order: [[4, 'desc']],
                 columns: [
                     { data: 'DT_RowIndex', name: 'DT_RowIndex', orderable: false, searchable: false },
                     { data: 'nama_dokter', name: 'dokter.nama_dokter' },

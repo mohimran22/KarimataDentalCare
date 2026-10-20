@@ -22,6 +22,7 @@ class ObatController extends Controller
                 ->editColumn('harga_beli', function ($obat) {
                     return 'Rp' . number_format($obat->harga_beli, 0, ',', '.');
                 })
+                ->addIndexColumn()
             ->addColumn('action', function ($obat) {
                 $buttons = '<div class="flex items-center justify-center gap-2">';
 
@@ -124,7 +125,7 @@ class ObatController extends Controller
 
         return response()->json([
             'success' => true,
-            'message' => 'Data pasien berhasil dihapus.'
+            'message' => 'Data obat berhasil dihapus.'
         ]);
     }
 }

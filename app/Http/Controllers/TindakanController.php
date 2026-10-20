@@ -77,29 +77,6 @@ class TindakanController extends Controller
                     return $row->tindakan ?? '-';
                 })
 
-                // ->addColumn('aksi', function ($row) {
-
-                //     return '
-                //         <div class="flex items-center gap-2">
-
-                //             <a href="'.route('tindakan.edit', $row->id).'"
-                //                 class="px-3 py-2 text-xs font-medium text-white bg-yellow-500 rounded-lg hover:bg-yellow-600">
-                //                 Edit
-                //             </a>
-
-                //             <a href="'.route('tindakan.show', $row->id).'"
-                //                 class="px-3 py-2 text-xs font-medium text-white bg-blue-500 rounded-lg hover:bg-blue-600">
-                //                 Lihat
-                //             </a>
-                //             <button 
-                //                 class="delete-tindakans px-3 py-2 text-xs font-medium text-white bg-red-500 rounded-lg hover:bg-red-600"
-                //                 data-id="'.$row->id.'">
-                //                 Hapus
-                //             </button>
-
-                //         </div>
-                //     ';
-                // })
                 ->addColumn('aksi', function ($row) {
 
                     $buttons = '<div class="flex items-center justify-center gap-2">';

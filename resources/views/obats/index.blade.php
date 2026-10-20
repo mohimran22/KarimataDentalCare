@@ -30,7 +30,7 @@
                         <table id="obat-table" class="w-full text-sm text-left text-gray-500">
                             <thead class="text-xs text-gray-700 uppercase bg-gray-50">
                                 <tr>
-                                    <th scope="col" class="px-4 py-3">ID</th>
+                                    <th scope="col" class="px-4 py-3">No.</th>
                                     <th scope="col" class="px-4 py-3">Nama Obat</th>
                                     <th scope="col" class="px-4 py-3">Merk</th>
                                     <th scope="col" class="px-4 py-3">Ukuran</th>
@@ -73,12 +73,12 @@
 </x-app-layout>
     <script>
         $(function () {
-            $('#obat-table').DataTable({
+            const table = $('#obat-table').DataTable({
                 processing: true,
                 serverSide: true,
                 ajax: "{{ route('obats.index') }}",
                 columns: [
-                    { data: 'id_obat', name: 'id_obat' },
+                    { data: 'DT_RowIndex', name: 'DT_RowIndex', orderable: false, searchable: false },
                     { data: 'nama_obat', name: 'nama_obat' },
                     { data: 'merk', name: 'merk' },
                     { data: 'ukuran', name: 'ukuran' },
@@ -87,6 +87,27 @@
                     { data: 'supplier', name: 'supplier' },
                     { data: 'action', name: 'action', orderable: false, searchable: false },
                 ],
+                language: {
+                    search: "",
+                    searchPlaceholder: "Cari obat...",
+                    lengthMenu: "Tampilkan _MENU_ data",
+                    info: "Menampilkan _START_ - _END_ dari _TOTAL_ data",
+                    infoEmpty: "Tidak ada data",
+                    infoFiltered: "(difilter dari _MAX_ total data)",
+                    zeroRecords: "Data tidak ditemukan",
+                    paginate: {
+                        first: "Awal",
+                        last: "Akhir",
+                        next: "›",
+                        previous: "‹"
+                    }
+                },
+
+                initComplete: function () {
+                    const input = $('.dt-search input');
+                    input.removeClass('form-control-sm')
+                        .addClass('form-control');
+                }
             });
             $('#obat-table').on('click', '.delete-obats', function () {
 
