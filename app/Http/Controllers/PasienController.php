@@ -35,8 +35,8 @@ class PasienController extends Controller
                     $buttons .= '
                         <a href="' . route('pasiens.edit', $pasien->id_pasien) . '"  
                             class="inline-flex items-center justify-center
-                                w-10 h-10
-                                rounded-xl
+                                w-8 h-8
+                                rounded-md
                                 bg-amber-500 hover:bg-amber-600
                                 text-white
                                 transition-all duration-200 shadow-sm"
