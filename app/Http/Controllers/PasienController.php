@@ -13,14 +13,6 @@ use Yajra\DataTables\Facades\DataTables;
 
 class PasienController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
-    // public function index()
-    // {
-    //     $pasiens = Pasien::all(); // Mengambil semua data pasien
-    //     return view('pasiens.index', compact('pasiens'));
-    // }
     public function index()
 {
     if(request()->ajax()) {
@@ -29,6 +21,9 @@ class PasienController extends Controller
 
         return DataTables::of($data)
             ->addIndexColumn()
+            ->addColumn('alergi', function ($pasien) {
+                return $pasien->alergi ?? '-';
+            })
             ->addColumn('action', function ($pasien) {
                 $buttons = '<div class="flex items-center justify-center gap-2">';
 

@@ -8,11 +8,6 @@ use Yajra\DataTables\Facades\DataTables;
 
 class ObatController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
-
-
     public function index(Request $request)
     {
         if ($request->ajax()) {
@@ -29,8 +24,8 @@ class ObatController extends Controller
                     $buttons .= '
                         <a href="' . route('obats.edit', $obat->id_obat) . '"  
                             class="inline-flex items-center justify-center
-                                w-10 h-10
-                                rounded-xl
+                                w-8 h-8
+                                rounded-md
                                 bg-amber-500 hover:bg-amber-600
                                 text-white
                                 transition-all duration-200 shadow-sm"
