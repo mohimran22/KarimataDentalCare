@@ -56,9 +56,27 @@
                                     Password
                                 </label>
 
-                                <input type="password"
-                                    name="password"
-                                    class="w-full rounded-xl border-gray-300 shadow-sm focus:border-blue-500 focus:ring focus:ring-blue-200 transition @error('password') border-red-500 @enderror">
+                                <div class="relative">
+                                    <input type="password"
+                                        name="password"
+                                        id="password"
+                                        autocomplete="new-password"
+                                        class="w-full rounded-xl border-gray-300 shadow-sm
+                                            focus:border-blue-500 focus:ring focus:ring-blue-200
+                                            transition pr-12
+                                            @error('password') border-red-500 @enderror">
+
+                                    <button type="button"
+                                        id="togglePassword"
+                                        class="absolute inset-y-0 right-0 flex items-center
+                                            px-4 text-gray-500 hover:text-blue-600
+                                            focus:outline-none"
+                                        aria-label="Tampilkan password"
+                                        aria-pressed="false">
+
+                                        <i id="eyeIcon" class="ti ti-eye text-xl"></i>
+                                    </button>
+                                </div>
 
                                 @error('password')
                                     <p class="mt-2 text-sm text-red-600">{{ $message }}</p>
@@ -601,6 +619,30 @@ $(document).ready(function () {
 
         toggle.addEventListener('change', updateState);
 
+    });
+    
+    document.addEventListener('DOMContentLoaded', function () {
+        const passwordInput = document.getElementById('password');
+        const toggleButton = document.getElementById('togglePassword');
+        const eyeIcon = document.getElementById('eyeIcon');
+
+        if (!passwordInput || !toggleButton || !eyeIcon) return;
+
+        toggleButton.addEventListener('click', function () {
+            const isPassword = passwordInput.type === 'password';
+
+            passwordInput.type = isPassword ? 'text' : 'password';
+
+            eyeIcon.classList.toggle('ti-eye', !isPassword);
+            eyeIcon.classList.toggle('ti-eye-off', isPassword);
+
+            toggleButton.setAttribute(
+                'aria-label',
+                isPassword ? 'Sembunyikan password' : 'Tampilkan password'
+            );
+
+            toggleButton.setAttribute('aria-pressed', String(isPassword));
+        });
     });
 
 </script>

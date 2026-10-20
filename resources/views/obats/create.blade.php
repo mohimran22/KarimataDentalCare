@@ -4,23 +4,29 @@
             {{ __('Tambah Obat') }}
         </h2>
     </x-slot>
+    <div class="min-h-screen bg-gray-100 py-10">
+        <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
 
-    <div class="container mx-auto mt-4">
-        {{-- Menampilkan pesan sukses jika ada --}}
-        @if(session('success'))
-            <div class="bg-green-500 text-white p-4 rounded mb-4">
-                {{ session('success') }}
-            </div>
-        @endif
+            <div class="bg-white shadow-xl rounded-2xl overflow-hidden">
 
-        <section class="bg-gray-50 dark:bg-gray-900 py-3 sm:py-5">
-            <div class="px-4 mx-auto max-w-screen-2xl lg:px-12">
-                <div class="relative overflow-hidden bg-white shadow-md dark:bg-gray-800 sm:rounded-lg">
-                    <div class="px-4 py-3">
-                        <h3 class="text-lg font-medium text-gray-900 dark:text-gray-100">
-                            Tambah Data Obat
-                        </h3>
-
+                <div class="bg-primary-700 px-8 py-6 rounded-t-lg">
+                    <h2 class="text-2xl text-white">
+                        Tambah Data Obat
+                    </h2>
+                    <p class="text-blue-100 mt-1 text-sm">
+                        Lengkapi informasi obat dengan benar
+                    </p>
+                </div>
+                <div class="p-8">
+                    @if ($errors->any())
+                        <div class="mb-6 rounded-lg bg-red-100 border border-red-300 text-red-700 p-4">
+                            <ul class="list-disc list-inside space-y-1">
+                                @foreach ($errors->all() as $error)
+                                    <li>{{ $error }}</li>
+                                @endforeach
+                            </ul>
+                        </div>
+                    @endif
                         <form action="{{ route('obats.store') }}" method="POST" class="mt-4">
                             @csrf
                             <div class="grid grid-cols-1 gap-6 md:grid-cols-2">
@@ -102,9 +108,9 @@
 
                             </div>
                         </form>
-                    </div>
                 </div>
             </div>
-        </section>
+        </div>
     </div>
+
 </x-app-layout>

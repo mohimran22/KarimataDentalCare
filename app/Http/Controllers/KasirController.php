@@ -74,15 +74,15 @@ class KasirController extends Controller
             })
 
                 ->editColumn('total_biaya', function ($row) {
-                    return number_format($row->total_biaya, 0, ',', '.');
+                    return 'Rp ' . number_format($row->total_biaya, 0, ',', '.');
                 })
 
                 ->editColumn('dibayar', function ($row) {
-                    return number_format($row->dibayar, 0, ',', '.');
+                    return 'Rp ' . number_format($row->dibayar, 0, ',', '.');
                 })
 
                 ->editColumn('kembalian', function ($row) {
-                    return number_format($row->kembalian, 0, ',', '.');
+                    return 'Rp ' . number_format($row->kembalian, 0, ',', '.');
                 })
 
                 // ->addColumn('aksi', function ($row) {
